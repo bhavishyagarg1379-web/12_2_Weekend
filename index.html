@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bhavishya Garg · portfolio</title>
+  <!-- Font Awesome 6 (free) for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ---------- CSS reset & base ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f5f9ff;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1e2b3c;
+      line-height: 1.5;
+      padding: 2rem 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    /* subtle modern gradient background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 10% 20%, rgba(200, 230, 255, 0.4) 0%, transparent 50%),
+                  radial-gradient(circle at 90% 80%, rgba(180, 210, 255, 0.3) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* main card container */
+    .portfolio {
+      max-width: 1000px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 2rem;
+      box-shadow: 0 20px 40px -12px rgba(0, 30, 60, 0.25), 0 4px 18px rgba(0, 0, 0, 0.05);
+      padding: 2.2rem 2.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      transition: all 0.2s;
+    }
+
+    /* header / name & contact */
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #cbdff2;
+      padding-bottom: 1.5rem;
+    }
+
+    .name-title h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #0b2a4a;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .name-title .subhead {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #2e577a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .name-title .subhead i {
+      color: #3b7a9e;
+      font-size: 1rem;
+    }
+
+    .contact-info {
+      text-align: right;
+      background: #e6f0fa;
+      padding: 0.9rem 1.3rem;
+      border-radius: 2.5rem;
+      box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.8), 0 4px 8px rgba(0, 20, 40, 0.05);
+    }
+
+    .contact-info p {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.7rem;
+      font-size: 0.95rem;
+      margin: 0.3rem 0;
+      color: #0d3d5c;
+      font-weight: 450;
+      word-break: break-word;
+    }
+
+    .contact-info i {
+      width: 1.3rem;
+      color: #2875a3;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+
+    /* cards / grid */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.6rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .card {
+      background: #ffffffd6;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 1.6rem;
+      padding: 1.4rem 1.6rem;
+      box-shadow: 0 6px 16px rgba(0, 25, 50, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 24px -8px rgba(0, 45, 80, 0.15);
+      background: #ffffffec;
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #174a6b;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.1rem;
+      border-bottom: 2px solid #b8d3e8;
+      padding-bottom: 0.5rem;
+    }
+
+    .card h2 i {
+      color: #2b6c95;
+      font-size: 1.25rem;
+      width: 1.8rem;
+      text-align: center;
+    }
+
+    /* lists inside cards */
+    .card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .card ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      font-size: 1rem;
+      color: #203e53;
+      line-height: 1.4;
+    }
+
+    .card ul li i {
+      color: #2875a3;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+      width: 1.2rem;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    /* badges for skills / tech */
+    .skill-badge {
+      display: inline-block;
+      background: #e3eef9;
+      padding: 0.25rem 0.9rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #13547a;
+      margin-right: 0.4rem;
+      margin-bottom: 0.4rem;
+      border: 1px solid #b7d3e8;
+    }
+
+    /* personal details styling */
+    .personal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    .personal-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      font-size: 0.98rem;
+    }
+
+    .personal-item .label {
+      font-weight: 600;
+      color: #13547a;
+      min-width: 100px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .personal-item .value {
+      color: #1e3c53;
+      font-weight: 450;
+    }
+
+    .personal-item .label i {
+      color: #2b6c95;
+      font-size: 0.9rem;
+      width: 1.1rem;
+    }
+
+    /* declaration + footer */
+    .declaration {
+      margin-top: 1.8rem;
+      padding-top: 1.2rem;
+      border-top: 2px dashed #bed7ec;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.95rem;
+      color: #345f7a;
+    }
+
+    .declaration p {
+      font-style: italic;
+      max-width: 70%;
+      background: #e5f0fa;
+      padding: 0.6rem 1.3rem;
+      border-radius: 2rem;
+      font-weight: 450;
+    }
+
+    .signature {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #0a3552;
+      letter-spacing: 0.5px;
+      border-bottom: 3px solid #a2c4dd;
+      padding-bottom: 0.2rem;
+    }
+
+    /* utility & responsiveness */
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 1rem 0.8rem;
+      }
+
+      .portfolio {
+        padding: 1.5rem 1.2rem;
+        border-radius: 1.8rem;
+      }
+
+      .header {
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+
+      .contact-info {
+        text-align: left;
+        width: 100%;
+        padding: 0.9rem 1rem;
+        border-radius: 1.5rem;
+      }
+
+      .contact-info p {
+        justify-content: flex-start;
+      }
+
+      .name-title h1 {
+        font-size: 2.2rem;
+      }
+
+      .grid-2col {
+        grid-template-columns: 1fr;
+        gap: 1.3rem;
+      }
+
+      .personal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .declaration {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .declaration p {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 450px) {
+      .card {
+        padding: 1.2rem;
+      }
+
+      .card h2 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="portfolio">
+    <!-- HEADER : name + contact -->
+    <div class="header">
+      <div class="name-title">
+        <h1>Bhavishya Garg</h1>
+        <div class="subhead">
+          <i class="fas fa-briefcase"></i> B.Com (Hons) · Aspiring Analyst
+        </div>
+      </div>
+      <div class="contact-info">
+        <p><i class="fas fa-map-marker-alt"></i> M-4/31, Model Town 3, Delhi – 110009</p>
+        <p><i class="fas fa-phone-alt"></i> 7011005950</p>
+        <p><i class="fas fa-envelope"></i> bhavishyagarg1379@gmail.com</p>
+      </div>
+    </div>
+
+    <!-- 2-COLUMN GRID (CAREER OBJECTIVE spans both? we keep it full width inside the grid? better: we make objective full width separate) -->
+    <!-- But to keep a clean layout, I'll place objective as full-width card, then 2-col grid for education & skills, etc. -->
+    
+    <!-- career objective (full width) -->
+    <div class="card full-width" style="margin-bottom: 1.6rem;">
+      <h2><i class="fas fa-bullseye"></i> Career Objective</h2>
+      <p style="font-size: 1.05rem; color: #1e3c53; padding-left: 0.2rem; line-height: 1.6;">
+        To build a challenging career that leverages my analytical, communication, negotiation, and creative skills while contributing to organizational growth.
+      </p>
+    </div>
+
+    <!-- GRID: left = education + strengths + interests; right = computer skills + personal details -->
+    <div class="grid-2col">
+      <!-- LEFT COLUMN (education, strengths, interests) -->
+      <div style="display: flex; flex-direction: column; gap: 1.6rem;">
+        <!-- education card -->
+        <div class="card">
+          <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+          <ul>
+            <li><i class="fas fa-circle"></i> <span><strong>B.Com Honours</strong> (Pursuing)</span></li>
+            <li><i class="fas fa-circle"></i> <span><strong>12th</strong> – CBSE Board</span></li>
+            <li><i class="fas fa-circle"></i> <span><strong>10th</strong> – CBSE Board</span></li>
+          </ul>
+        </div>
+
+        <!-- strengths card -->
+        <div class="card">
+          <h2><i class="fas fa-star"></i> Strengths</h2>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Confident with strong interpersonal relationship management</li>
+            <li><i class="fas fa-check-circle"></i> Hardworking with effective communication skills</li>
+          </ul>
+        </div>
+
+        <!-- interests card -->
+        <div class="card">
+          <h2><i class="fas fa-heart"></i> Interests</h2>
+          <ul>
+            <li><i class="fas fa-headphones-alt"></i> Listening to music</li>
+            <li><i class="fas fa-baseball-ball"></i> Playing and following cricket</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN (computer skills, personal details) -->
+      <div style="display: flex; flex-direction: column; gap: 1.6rem;">
+        <!-- computer skills card -->
+        <div class="card">
+          <h2><i class="fas fa-laptop-code"></i> Computer Skills</h2>
+          <div style="margin-bottom: 0.6rem;">
+            <span class="skill-badge">Tally</span>
+            <span class="skill-badge">Advanced Excel</span>
+            <span class="skill-badge">Python</span>
+            <span class="skill-badge">MySQL</span>
+            <span class="skill-badge">Power BI</span>
+          </div>
+          <ul style="margin-top: 0.4rem;">
+            <li><i class="fas fa-table"></i> VLOOKUP, HLOOKUP, IF, OR, AND, Filters, Pivot Tables, Data Validation</li>
+          </ul>
+        </div>
+
+        <!-- personal details card -->
+        <div class="card">
+          <h2><i class="fas fa-id-card"></i> Personal Details</h2>
+          <div class="personal-grid">
+            <div class="personal-item">
+              <span class="label"><i class="fas fa-calendar-alt"></i> DOB</span>
+              <span class="value">6 May 2007</span>
+            </div>
+            <div class="personal-item">
+              <span class="label"><i class="fas fa-user-friends"></i> Father</span>
+              <span class="value">Gagan Garg</span>
+            </div>
+            <div class="personal-item">
+              <span class="label"><i class="fas fa-venus-mars"></i> Gender</span>
+              <span class="value">Male</span>
+            </div>
+            <div class="personal-item">
+              <span class="label"><i class="fas fa-language"></i> Languages</span>
+              <span class="value">Hindi, English</span>
+            </div>
+            <div class="personal-item">
+              <span class="label"><i class="fas fa-ring"></i> Marital Status</span>
+              <span class="value">Single</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DECLARATION -->
+    <div class="declaration">
+      <p><i class="fas fa-quote-left" style="margin-right: 0.4rem; opacity: 0.7;"></i> I hereby declare that the information provided above is true to the best of my knowledge.</p>
+      <div class="signature">Bhavishya Garg</div>
+    </div>
+  </div>
+</body>
+</html>
